@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const compression = require('compression');
 const path = require("path")
 const session = require('express-session');
-const api = require("./api")
 const mongoose = require('mongoose');
 const errorHandler = require('errorhandler');
 
