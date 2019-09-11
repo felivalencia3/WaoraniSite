@@ -65,4 +65,4 @@ app.get("/post", (req,res) => {
 app.post("/post", (req,res) => {
   res.json({message: "Hello, World!"})
 })
-app.listen(8081, () => console.log('Server running on http://localhost:8081/'));
+app.listen((process.env.PORT || 8081), () => console.log('Server running on http://localhost:8081/'));
