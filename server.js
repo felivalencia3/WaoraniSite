@@ -28,8 +28,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(`${__dirname}/dist`));
 // Configure Mongoose
-const uristring = process.env.MONGODB_URI
-  || 'mongodb://localhost/waorani';
+const uristring = process.env.MONGODB_URI;
 
 mongoose.connect(uristring, {
   useNewUrlParser: true,
