@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <%- include('header'); -%>
+<%- include('header'); -%>
 
 <body>
 
@@ -22,35 +22,30 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <% posts.forEach(post => { %>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          <a href="/post">
+          <a href="/post/<%= post.title %>">
             <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
+              <%=post.title%>
             </h2>
             <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
+              <%=post.subtitle%>
             </h3>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
+            <a href="#"><%= post.author %></a></p>
         </div>
         <hr>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
       </div>
     </div>
   </div>
-
+  <% }); %>
   <hr>
 
-  
+
 
 
   <!-- Bootstrap core JavaScript -->

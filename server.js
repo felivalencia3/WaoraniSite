@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require("moment")
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -28,7 +29,7 @@ app.use(cors());
 app.use(express.static(`${__dirname}/dist`));
 // Configure Mongoose
 const uristring = process.env.MONGODB_URI
-  || 'mongodb://localhost/auth';
+  || 'mongodb://localhost/waorani';
 
 mongoose.connect(uristring, {
   useNewUrlParser: true,
@@ -46,12 +47,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 mongoose.set('debug', true);
 // Models and Routes
+require("./models/Post")
+const Post = mongoose.model("Post");
 app.use(express.static("."));
 app.get("send_mail",(req,res) =>{
   const {name, phone, email, message} = req.body
 })
 app.get("", (req,res,next) => {
-  res.render("index")
+  Post.find({}, (err, post) => {
+    res.render("index", {posts: post, moment: moment})
+  })
 })
 app.get("/about", (req,res) => {
   res.render("about")
@@ -59,10 +64,20 @@ app.get("/about", (req,res) => {
 app.get("/contact", (req,res) => {
   res.render("contact")
 })
-app.get("/post", (req,res) => {
-  res.render("post")
+app.get("/post/:post", (req,res) => {
+  Post.findOne({"title": req.params.post}, (err, post) => {
+    res.render("post", {post})
+  })
 })
-app.post("/post", (req,res) => {
-  res.json({message: "Hello, World!"})
+app.post("/upload", (req,res) => {
+  const {body, title, image_url, post_date, subheading, author} = req.body;
+  
+  Post.create({body,title,image_url,post_date,subheading, author, Date: Date.now}, function (err, post) {
+    if (err) return handleError(err);
+    return res.redirect("/")
+  });
+})
+app.get("/admin/new", (req,res) => {
+  res.render("postform")
 })
 app.listen((process.env.PORT || 8081), () => console.log('Server running on http://localhost:8081/'));
