@@ -1,5 +1,4 @@
 const express = require('express');
-const moment = require("moment")
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -28,7 +27,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(`${__dirname}/dist`));
 // Configure Mongoose
-const uristring = process.env.MONGODB_URI;
+const uristring = process.env.MONGODB_URI
+  || 'mongodb://localhost/waorani';
 
 mongoose.connect(uristring, {
   useNewUrlParser: true,
@@ -54,7 +54,7 @@ app.get("send_mail",(req,res) =>{
 })
 app.get("", (req,res,next) => {
   Post.find({}, (err, post) => {
-    res.render("index", {posts: post, moment: moment})
+    res.render("index", {posts: post})
   })
 })
 app.get("/about", (req,res) => {
