@@ -8,22 +8,8 @@ const PostSchema = new Schema({
   body: String,
   title: String,
   image_url: String,
-  post_date: Date,
+  date: Date,
   subheading: String,
 
 });
-PostSchema.methods.toUserJSON = () => {
-  const UserJSON = {
-    user: this.User,
-    weight: this.Weight,
-    gender: this.Gender,
-    height: this.Height,
-    age: this.Age,
-    Date: this.Date,
-    BMI: this.BMI,
-    BMR: this.BMR,
-    idealWeight: this.IdealWeight,
-  };
-  return UserJSON;
-};
 mongoose.model('Post', PostSchema);

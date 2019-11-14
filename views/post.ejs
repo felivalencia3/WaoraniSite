@@ -16,7 +16,7 @@
             <h2 class="subheading"><%= post.subheading %></h2>
             <span class="meta">Posted by
               <%= post.author %>
-              on <%= post.post_date %></span>
+              on <%= moment(post.date).format("MMMM Do YYYY")%> </span>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <%= post.body %>
+          <%- post.body %>
         </div>
       </div>
     </div>
