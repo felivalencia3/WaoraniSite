@@ -71,8 +71,8 @@ app.get("/post/:post", (req, res) => {
 });
 app.post("/upload", (req, res) => {
     const {body, title, image_url, subheading, author,country} = req.body;
-    body = body.toString().trim()
-    newbody = body.toString()+"<br>Writing from: <h2>"+country.toString()+"</h2>";
+    newbody = body.toString().trim()+"<br>Writing from: <h2>"+country.toString()+"</h2>";
+    
     Post.create({body:newbody, title, image_url, subheading, author, date: Date.now()}, function (err, post) {
         if (err) res.status(500).send(error);
         return res.redirect("/")
