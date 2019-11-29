@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const app = require("express").Router();
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const moment = require("moment");
 const cookieParser = require("cookie-parser")
 app.use(cookieParser())
 const Post = mongoose.model("Post");
@@ -41,11 +42,16 @@ app.get("/admin/new", (req, res) => {
     }
     
 });
-app.post("/admin/login" , (req,res) => {
+app.post("/admin/login", require("body-parser").urlencoded(), (req,res) => {
     const {uname, psw} = req.body;
+    /*
     if (uname == "gpclass" && psw=="12345") {
         res.cookie("admin", true)
         res.redirect("/admin/new")
     }
+    else {
+        res.redirect("/")
+    }
+    */
 })
 module.exports = app;
