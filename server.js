@@ -26,7 +26,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(`${__dirname}/dist`));
+app.use(express.static(`${__dirname}/public`));
 // Configure Mongoose
 const uristring = process.env.MONGODB_URI
     || 'mongodb://localhost/waorani';
