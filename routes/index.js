@@ -26,7 +26,7 @@ app.get("/post/:post", (req, res) => {
 });
 app.post("/upload", (req, res) => {
     const {body, title, image_url, subheading, author,country} = req.body;
-    newbody = body.toString().trim()+"<br>Writing from: <h2>"+country.toString()+"</h2>";
+    newbody = (body.toString().trim()+"<br><br>Writing from: <h2>"+country.toString()+"</h2>").trim();
 
     Post.create({body:newbody, title, image_url, subheading, author, date: Date.now()}, function (err, post) {
         if (err) res.status(500).send(error);
@@ -44,7 +44,6 @@ app.get("/admin/new", (req, res) => {
 });
 app.post("/admin/login", require("body-parser").urlencoded(), (req,res) => {
     const {uname, psw} = req.body;
-    /*
     if (uname == "gpclass" && psw=="12345") {
         res.cookie("admin", true)
         res.redirect("/admin/new")
@@ -52,6 +51,5 @@ app.post("/admin/login", require("body-parser").urlencoded(), (req,res) => {
     else {
         res.redirect("/")
     }
-    */
 })
 module.exports = app;
