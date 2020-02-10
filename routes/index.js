@@ -17,10 +17,11 @@ app.get("send_mail", (req, res) => {
     } = req.body
 });
 app.get("", (req, res, next) => {
+    var isAdmin = (req.cookies.admin == 'true');
     Post.find({}).sort("-date").exec((err, post) => {
         res.render("index", {
             posts: post,
-            admin: eval(req.cookies.admin)
+            admin: isAdmin
         })
     })
 });
@@ -28,7 +29,6 @@ app.get("", (req, res, next) => {
 app.get("/about", (req, res) => {
     res.render("about")
 });
-
 
 app.get("/post/:post", (req, res) => {
     const postName = decodeURIComponent(req.params.post)
