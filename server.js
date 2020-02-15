@@ -48,6 +48,8 @@ if (process.env.NODE_ENV === 'development') {
 mongoose.set('debug', true);
 // Models and Routes
 require("./models/Post");
+require("./models/Counter")
+const Counter = mongoose.model("Counter");
 const Post = mongoose.model("Post");
 app.use(express.static("."));
 app.use(require("./routes"));

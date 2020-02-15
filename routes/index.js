@@ -5,18 +5,11 @@ const moment = require("moment");
 const cookieParser = require("cookie-parser")
 
 app.use(cookieParser())
-
+const Counter = mongoose.model("Counter");
 const Post = mongoose.model("Post");
 
-app.get("send_mail", (req, res) => {
-    const {
-        name,
-        phone,
-        email,
-        message
-    } = req.body
-});
 app.get("", (req, res, next) => {
+    Counter.findOneAndUpdate({_id:1}, {$inc: {counter: 1}}).exec()
     var isAdmin = (req.cookies.admin == 'true');
     Post.find({}).sort("-date").exec((err, post) => {
         res.render("index", {
@@ -60,7 +53,7 @@ app.post("/upload", (req, res) => {
         author,
         date: Date.now()
     }, function (err, post) {
-        if (err) res.status(500).send(error);
+        if (err) res.status(500).send(err);
         return res.redirect("/")
     });
     res.redirect("/")
