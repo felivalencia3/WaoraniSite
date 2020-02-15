@@ -33,6 +33,7 @@ const uristring = process.env.MONGODB_URI
 
 mongoose.connect(uristring, {
     useNewUrlParser: true,
+    useFindAndModify: false 
 }, (err) => {
     if (err) {
         console.log(`ERROR connecting to: ${uristring}. ${err}`);

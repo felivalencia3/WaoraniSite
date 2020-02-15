@@ -12,10 +12,12 @@ app.get("", (req, res, next) => {
     Counter.findOneAndUpdate({_id:1}, {$inc: {counter: 1}}).exec()
     var isAdmin = (req.cookies.admin == 'true');
     Post.find({}).sort("-date").exec((err, post) => {
-        res.render("index", {
-            posts: post,
-            admin: isAdmin
-        })
+        if (err) {res.status(500).send(err)}
+        Counter.findById(1,"counter",(erro,visitors) => {
+            if (erro) {res.status(500).send(erro)}
+            res.render("index", {posts: post,admin: isAdmin,counter: visitors.counter})
+        }) 
+        
     })
 });
 
