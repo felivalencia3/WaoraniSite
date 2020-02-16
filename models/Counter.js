@@ -7,6 +7,6 @@ const CounterSchema = new Schema({
   _id: Number,
   counter: Number
 });
-var Counter = mongoose.model('Counter', CounterSchema);
+var Counter = mongoose.model('counter', CounterSchema);
 
 
