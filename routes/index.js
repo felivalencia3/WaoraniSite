@@ -13,9 +13,9 @@ app.get("", (req, res, next) => {
     var isAdmin = (req.cookies.admin == 'true');
     Post.find({}).sort("-date").exec((err, post) => {
         if (err) {res.status(500).send(err)}
-        Counter.findById(1,"counter",(erro,visitors) => {
+        Counter.findById(1,(erro,visitors) => {
             if (erro) {res.status(500).send(erro)}
-            res.render("index", {posts: post,admin: isAdmin,counter: visitors.counter})
+            res.render("index", {posts: post,admin: isAdmin, counter: visitors})
         }) 
         
     })
