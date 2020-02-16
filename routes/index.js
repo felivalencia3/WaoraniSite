@@ -5,7 +5,7 @@ const moment = require("moment");
 const cookieParser = require("cookie-parser")
 
 app.use(cookieParser())
-const Counter = mongoose.model("counter");
+const Counter = mongoose.model("Counter");
 const Post = mongoose.model("Post");
 
 app.get("", (req, res, next) => {
