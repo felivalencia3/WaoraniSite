@@ -5,7 +5,7 @@ const moment = require("moment");
 const cookieParser = require("cookie-parser")
 
 app.use(cookieParser())
-const Counter = mongoose.model("Counter");
+const Counter = mongoose.model("counter");
 const Post = mongoose.model("Post");
 
 app.get("", (req, res, next) => {
@@ -15,7 +15,7 @@ app.get("", (req, res, next) => {
         if (err) {res.status(500).send(err)}
         Counter.findById(1,(erro,visitors) => {
             if (erro) {res.status(500).send(erro)}
-            res.render("index", {posts: post,admin: isAdmin, counter: visitors})
+            res.render("index", {posts: post,admin: isAdmin, counter: visitors.counter})
         }) 
         
     })
