@@ -45,7 +45,7 @@ app.post("/upload", (req, res) => {
         author,
         country
     } = req.body;
-    newbody = (body.toString().trim() + "<br><br>Writing from: <h2>" + country.toString() + "</h2>").trimLeft();
+    newbody = (body.toString().trim() + "<br><br>Writing from: <h2>" + country.toString() + "</h2>").trimLeft().replace(/\n/g, "<br />");;
 
     Post.create({
         body: newbody,

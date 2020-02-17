@@ -1,6 +1,6 @@
 const app = require("express").Router();
 
-app.get("/admin/new", (req, res) => {
+app.get("/new", (req, res) => {
   if (eval(req.cookies.admin)) {
       res.render("postform")
   }
@@ -9,7 +9,7 @@ app.get("/admin/new", (req, res) => {
   }
   
 });
-app.post("/admin/login", require("body-parser").urlencoded(), (req,res) => {
+app.post("/login", require("body-parser").urlencoded(), (req,res) => {
   const {uname, psw} = req.body;
   if (uname == "gpclass" && psw=="12345") {
       res.cookie("admin", true)
