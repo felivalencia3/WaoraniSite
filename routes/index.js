@@ -41,7 +41,7 @@ app.post("/upload", (req, res) => {
         body,
         title,
         image_url,
-        subheading,
+        subheading: subhead,
         author,
         country
     } = req.body;
